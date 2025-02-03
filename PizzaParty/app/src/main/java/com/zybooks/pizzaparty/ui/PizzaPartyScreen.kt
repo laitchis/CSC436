@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.zybooks.pizzaparty.HungerLevel
 import com.zybooks.pizzaparty.ui.theme.PizzaPartyTheme
+import androidx.compose.foundation.lazy.items
 
 @Composable
 fun PizzaPartyScreen(
@@ -48,6 +50,13 @@ fun PizzaPartyScreen(
             onClick = { partyViewModel.calculateNumPizzas() },
             modifier = modifier
         )
+        LazyColumn {
+            items(7) {
+                index ->
+                    Text(text = index) }   items(7) { item -> Text(text = item)
+            }
+        }
+
     }
 }
 
