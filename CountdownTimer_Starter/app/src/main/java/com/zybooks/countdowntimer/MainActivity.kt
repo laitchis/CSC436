@@ -35,4 +35,23 @@ class MainActivity : ComponentActivity() {
          }
       }
    }
+   override fun onStop() {
+      super.onStop()
+
+      // Start TimerWorker if the timer is running
+      if (timerViewModel.isRunning) {
+         startWorker(timerViewModel.remainingMillis)
+      }
+   }
+
+   private fun startWorker(millisRemain: Long) {
+      val timerWorkRequest: WorkRequest = OneTimeWorkRequestBuilder<TimerWorker>()
+         .setInputData(
+            workDataOf(
+               KEY_MILLIS_REMAINING to millisRemain
+            )
+         ).build()
+
+      WorkManager.getInstance(applicationContext).enqueue(timerWorkRequest)
+   }
 }
